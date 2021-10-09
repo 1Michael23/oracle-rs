@@ -1,24 +1,10 @@
 extern crate rand;
-use rust_embed::RustEmbed;
-
-use rand::seq::IteratorRandom; // 0.7.3
-use std::{
-    fs::File,
-    io::{BufRead, BufReader},
-};
-
+use rand::seq::IteratorRandom; use core::panic;
+// 0.7.3
+use std::{fs::File, io::{BufRead, BufReader}};
 extern crate clap;
 use clap::{Arg, App};
-
-const FILENAME: &str = "wordlist.txt";
-
-#[derive(RustEmbed)]
-#[folder = "."]
-struct Asset;
-
 fn main() {
-    
-   
 
     //Set options for cli arguments
 
@@ -30,13 +16,19 @@ fn main() {
                 .short('q')
                 .about("The number of words to print.")
                 .default_value("1"))
+            .arg(Arg::new("file")
+                .short('f')
+                .about("The file to read from")
+                .default_value("./wordlist.txt"))
         .get_matches();
 
         let string = cli.value_of("quantity").unwrap().to_string();
         let quantity: u8 = string.parse().unwrap();
 
+        let filepath = cli.value_of("file").unwrap().to_string();
+
         for _i in 0..quantity {
-            let output = find_word();
+            let output = find_word(filepath.clone());
             print!("{}", output);
             print!(" ")
         }
@@ -45,13 +37,13 @@ fn main() {
 
 // find a line from the specified file
 
-fn find_word() -> String {
-    let f = File::open(FILENAME)
-        .unwrap_or_else(|e| panic!("(;_;) file not found: {}: {}", FILENAME, e));
-    let f = BufReader::new(f);
+fn find_word(filepath: String) -> String {
+    let file = File::open(filepath).unwrap_or_else(|e| panic!("{} : file could not be found, see --help for info.", e)); //File::open(FILENAME)
+    
+    let f = BufReader::new(file);
 
     let lines = f.lines().map(|l| l.expect("Couldn't read line"));
-
+    
     lines
         .choose(&mut rand::thread_rng())
         .expect("Wordlist was compiled empty...")
