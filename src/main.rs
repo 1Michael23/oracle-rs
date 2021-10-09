@@ -1,4 +1,5 @@
 extern crate rand;
+use rust_embed::RustEmbed;
 
 use rand::seq::IteratorRandom; // 0.7.3
 use std::{
@@ -10,6 +11,11 @@ extern crate clap;
 use clap::{Arg, App};
 
 const FILENAME: &str = "wordlist.txt";
+
+#[derive(RustEmbed)]
+#[folder = "."]
+struct Asset;
+
 fn main() {
     
    
