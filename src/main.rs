@@ -48,7 +48,7 @@ fn find_word() -> String {
 
     lines
         .choose(&mut rand::thread_rng())
-        .expect("File had no lines")
+        .expect("Wordlist was compiled empty...")
 
 
 }
