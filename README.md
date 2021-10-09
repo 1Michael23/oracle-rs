@@ -4,12 +4,15 @@ A recreation of the Oracle from TempleOS, by Terry A Davis
 
 ## Usage 
 
-Running the binary with no commands will produce a single random word from the wordlist.
+Running the binary with no commands will produce a single random word from the wordlist at the default location.
 
-The binary can also be ran with '-q' to specify the number of words to print.
+{
+  ./oracle-rs -f ~/Doccuments/wordlist.txt -q 17
+}
 
+The '-f' flag specifies the path of the file to be read from.
 
-![Alt text](https://cdn.discordapp.com/attachments/744788620946178059/896270002968223785/unknown.png "The help menu")
+The '-q' flag specifies the number of words to print.
 
 ## todo
 
