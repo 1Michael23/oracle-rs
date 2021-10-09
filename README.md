@@ -6,9 +6,9 @@ A recreation of the Oracle from TempleOS, by Terry A Davis
 
 Running the binary with no commands will produce a single random word from the wordlist at the default location.
 
-{
+```
   ./oracle-rs -f ~/Doccuments/wordlist.txt -q 17
-}
+```
 
 The '-f' flag specifies the path of the file to be read from.
 
